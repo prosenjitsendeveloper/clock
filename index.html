@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .javascriptclock {
+  height: 300px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+.timeclock {
+    margin-bottom: -180px;
+}
+
+.timeclock span {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+  .javascriptclockbutton button {
+    margin-left: 19px;
+}
+
+button#start {
+    padding: 10px 30px 10px 30px;
+    background-color: green;
+    border: 1px solid green;
+    color: #fff;
+    font-size: 20px;
+}
+
+button#stop {
+    padding: 10px 30px 10px 30px;
+    background-color: red;
+    border: 1px solid red;
+    color: #fff;
+    font-size: 20px;
+}
+
+button#restart {
+    padding: 10px 30px 10px 30px;
+    background-color: blue;
+    border: 1px solid blue;
+    color: #fff;
+    font-size: 20px;
+}
+
+</style>
+
+<body>
+
+  <div class="javascriptclock">
+    <div class="timeclock">
+      <span id="hours">00 :</span>
+      <span id="minutes">00 :</span>
+      <span id="seconds">00 :</span>
+      <span id="time">00</span>
+    </div>
+
+    <div class="javascriptclockbutton">
+      <button id="start">Star</button>
+      <button id="stop">Stop</button>
+      <button id="restart">Restart</button>
+    </div>
+  </div>
+
+
+
+  <script>
+    var a = 0;
+    var b = 0;
+    var c = 0;
+    var d = 0;
+   var id = setInterval(Anim,10);
+
+    function Anim(){
+      if(a < 60){
+      a = a + 1;
+      var target = document.getElementById("time");
+      target.innerHTML = a;
+      }else{
+      // Clear the interval, reset the counter, and start again
+            clearInterval(id);
+            a = 0;
+            b = b + 1;
+            document.getElementById("time").innerHTML = a;
+            document.getElementById("seconds").innerHTML = b + ":";
+           
+            id = setInterval(Anim, 10);
+      }
+
+      if(b == 60){
+        b = 0;
+        c = c + 1;
+        document.getElementById("minutes").innerHTML = c + ":";
+      }
+
+      if(c == 60){
+        c = 0;
+        d = d + 1;
+        document.getElementById("hours").innerHTML = d + ":";
+      }
+
+       document.getElementById("stop").addEventListener("click",function(){
+        clearInterval(id);
+      });
+
+       document.getElementById("start").addEventListener("click",function(){
+         // Clear any existing interval to prevent multiple intervals running
+         clearInterval(id);
+            // Start a new interval
+            id = setInterval(Anim, 10);
+      });
+
+      document.getElementById("restart").addEventListener("click", function() {
+            // Clear the interval, reset the counter, and start again
+            clearInterval(id);
+            a = 0;
+            b = 0;
+            c = 0;
+            d = 0;
+            document.getElementById("time").innerHTML = a;
+            document.getElementById("seconds").innerHTML = b;
+            document.getElementById("minutes").innerHTML = c;
+            document.getElementById("hours").innerHTML = d;
+            id = setInterval(Anim, 10);
+        });
+
+      
+      
+    }
+  </script>
+
+
+  
+  
+</body>
+</html>
